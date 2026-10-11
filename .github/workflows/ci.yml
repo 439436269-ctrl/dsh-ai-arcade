@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      # 没有运行时依赖：打包自检和引擎测试都是纯 Node，所以不需要 install。
+      - name: 打包自检
+        run: node test/bundle-check.mjs
+      - name: 象棋引擎测试
+        run: node --test test/xiangqi.test.mjs

@@ -1,0 +1,82 @@
+{
+  "name": "dsh-ai-arcade",
+  "version": "0.1.0",
+  "description": "AI 街机厅：在 DSH 界面里玩游戏，模型负责「想」、本地引擎负责「动」——含双脑贪吃蛇与中国象棋。",
+  "type": "module",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "game",
+    "arcade",
+    "snake",
+    "xiangqi",
+    "chinese-chess",
+    "llm",
+    "游戏",
+    "贪吃蛇",
+    "中国象棋"
+  ],
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/**/*.js",
+    "lib/**/*.html",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node tools/build-client.mjs && node tools/build-play.mjs",
+    "build:client": "node tools/build-client.mjs",
+    "build:play": "node tools/build-play.mjs",
+    "test": "node test/bundle-check.mjs && node --test test/xiangqi.test.mjs"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-llm": "^0.2.0-rc.2"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-slots"
+      ],
+      "platform": "web"
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.0-rc.2": "compatible"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/439436269-ctrl/dsh-ai-arcade.git"
+  },
+  "homepage": "https://github.com/439436269-ctrl/dsh-ai-arcade#readme",
+  "bugs": {
+    "url": "https://github.com/439436269-ctrl/dsh-ai-arcade/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

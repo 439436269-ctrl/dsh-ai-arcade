@@ -1,0 +1,11 @@
+# dsh-ai-arcade：往插件树里插一行（宿主半边提供 LLM 大脑路由，浏览器半边挂一个游戏面板）。
+# 注：name 必须等于包名；id 是本地行标识（也是设置页命名空间）。
+- insert:
+    - id: dsh-ai-arcade
+      name: dsh-ai-arcade
+      config:
+        enabled: true
+        provider: deepseek-account
+        model: deepseek-flash
+        maxTokens: 512
+        timeoutMs: 45000
